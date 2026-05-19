@@ -2,13 +2,13 @@ public class Variables {
   String name;
   int age;
   double height;
-  String gender;
+  char gender;
 
   public void dataInsert() {
     name = "Jihoon";
     age = 31;
     height = 183;
-    gender = "Male";
+    gender = 'M';
   }
 
   public static void main(String[] args) {
