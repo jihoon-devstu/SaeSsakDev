@@ -3,6 +3,7 @@ package com.sesac.ex01_ioc.Notification.controller;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sesac.ex01_ioc.Notification.service.EmailNotificationService;
@@ -21,12 +22,12 @@ public class UserController {
   private final SmsNotificationService smsNotificationService;
   private final ObjectMapper objectMapper;
 
-  @RequestMapping("/join")
+  @RequestMapping(value = "/join" , method = RequestMethod.GET)
   public void createUser() {
     emailNotificationService.sendNotification("반갑습니다!");
   }
 
-  @RequestMapping("/modify")
+  @RequestMapping(value = "/modify", method = RequestMethod.POST)
   public void modifyUser() {
     emailNotificationService.sendNotification("회원 정보가 수정되었습니다.");
   }
