@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
   // Mock 데이터 생성
   public MemberServiceImpl() {
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 10; i++) {
       save(MemberRequest.builder()
           .email("member" + (i + 1) + "@example.com")
           .build());
@@ -60,19 +60,19 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public MemberResponse update(Long id, MemberRequest request) {
-    
+
     MemberResponse foundMember = members.get(id);
     if (foundMember == null) {
       throw new RuntimeException("Member not found with id: " + id);
     }
-      MemberResponse updatedMember = MemberResponse.builder()
-          .id(id)
-          .email(request.email())
-          .createdAt(foundMember.createdAt())
-          .build();
+    MemberResponse updatedMember = MemberResponse.builder()
+        .id(id)
+        .email(request.email())
+        .createdAt(foundMember.createdAt())
+        .build();
 
     members.put(id, updatedMember);
-    
+
     return updatedMember;
   }
 
