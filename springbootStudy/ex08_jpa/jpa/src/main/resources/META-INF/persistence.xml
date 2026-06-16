@@ -10,6 +10,13 @@
   <class>com.example.jpa.persistenceContext.Book</class>
   <class>com.example.jpa.embeddable.Address</class>
   <class>com.example.jpa.embeddable.Company</class>
+  <class>com.example.jpa_association.domain.Category</class>
+  <class>com.example.jpa_association.domain.Item</class>
+  <class>com.example.jpa_association.domain.Post</class>
+  <class>com.example.jpa_association.domain.PostComment</class>
+  <class>com.example.jpa_jpql.domain.Department</class>
+  <class>com.example.jpa_jpql.domain.Employee</class>
+
     <properties>
     
       <!-- 데이터베이스 접속 정보 -->

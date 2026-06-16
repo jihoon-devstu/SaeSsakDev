@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ex09_spring_data_jpa
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_data_jpa?useSSL=false&serverTimezone=Asia/Seoul
+    username: jpauser
+    password: password1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always # 앱 구동 시 초기 스크립트 (schema.sql , data.sql) 항상 실행
+  jpa:
+    database: mysql
+    database-plarform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      show_sql: true
+      format_sql: true
+
+server:
+  port: 8080
