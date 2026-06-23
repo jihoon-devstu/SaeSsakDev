@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    /*
+      - JavaScript는 변수 타입을 지정하지 않는다.
+      - var 는 scope 가 함수 단위로 제한되지만, let 과 const는 블록 단위로 제한된다.
+      - var 와 let 은 초기할당이 없으면 undefined 값을 가지고 const는 초기할당이 없으면 에러가 발생한다.
+      - var 와 let은 재할당이 가능하지만 const는 재할당이 불가능하다.
+      - var 는 재선언이 가능하지만 let과 const는 재선언이 불가능하다.
+      - var 는 호이스팅이 가능하지만 let과 const는 호이스팅이 불가능하다.
+    */
+    let name = "John";
+    let age = 20;
+    let isStudent = true;
+    let hobbies = ["reading", "coding", "gaming"];
+    let person = {
+      name: "John",
+      age: 20,
+      isStudent: true
+    };
+
+    window.onload = function() {
+      document.getElementById("name").innerHTML = name;
+      document.getElementById("age").innerHTML = age;
+      document.getElementById("isStudent").innerHTML = isStudent;
+      document.getElementById("hobbies").innerHTML = hobbies;
+      document.getElementById("person").innerHTML = JSON.stringify(person);
+    };
+
+    /*
+      Template Literal 학습
+    */
+    {
+      const age = 20;
+      const name = 'John';
+      const a = '나는 ' + name + '이고, ' + age + '살이다.';
+      const b = `나는 ${name}이고, ${age}살이다.`;
+      console.log(a);
+      console.log(b);
+    }
+
+    /*
+      Hoisting 학습
+    */
+    {
+      money = 1000;
+      console.log(money);
+      var money;
+      // JavaScript Interpreter가 var 선언부를 가장 먼저 읽는다.
+    }
+    
+  </script>
+</head>
+<body>
+  <h1>Hello, my name is <span id="name"></span></h1>
+  <p>I am <span id="age"></span> years old and I am a <span id="isStudent"></span></p>
+  <p>My hobbies are: <span id="hobbies"></span></p>
+  <p>My person is: <span id="person"></span></p>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //함수 선언식 (반환 타입 작성 없음 , Hoisting 됨)
+    function fnDeclare (){
+      
+      console.log('함수 선언식');
+      
+    }
+
+    // 2. 함수 표현식 (함수를 변수에 할당하는 방법 , Hoisting 안 됨)
+    const fnExpr = function (){
+      console.log('함수 표현식');
+    }
+    fnExpr(); // 만들고 호출해야 함.
+
+    //3. 화살표 함수 (익명 함수의 간결한 버전) ()=>{}
+    const fnArrow = () => {
+      console.log('화살표 함수');
+    }
+
+    // 4. 콜백 함수
+    function login(arg1 , arg2){
+      arg1();
+      arg2();
+    }
+
+    function idCheck(){
+      console.log('아이디 체크');
+    }
+
+    function pwCheck(){
+      console.log('비밀번호 체크');
+    }
+
+    login(idCheck , pwCheck); // 함수 전달 (함수 이름을 인자로 사용함.)
+
+    login(()=>{
+      console.log('아이디 체크');
+    }, ()=>{
+      console.log('비밀번호 체크');
+    }); // 익명 함수 자체 전달
+
+  </script>
+   
+  
+
+</body>
+</html>

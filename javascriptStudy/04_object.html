@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 객체 리터럴 표기법 (중괄호 {})
+    {
+      const person = {
+        name : "John",
+        age : 20,
+        "isStudent" : true,
+        "hobbies" : ["reading", "coding", "gaming"],
+        // 후행 쉼표 가능
+      }
+    }
+
+    //객체 속성 (Property)    
+    {
+      const car = {
+        model : "Genesis",
+        price : 5000,
+        'car-maker':'Hyundai',
+        owner:{
+          name:"홍길동"
+        }
+      }
+
+      // Property Value 가져오기
+      // 1. Dot (car.model)
+      console.log(car.model); // 일반적인 상황
+      // 2. Bracket ([])
+      console.log(car["model"]); // 특수한 상황 (ex. key에 공백 or 하이픈 포함 , key가 변수에 저장된 경우)
+      // 3. Optional Chining -> 평가 대상이 없으면
+      console.log(car.owner.name);
+
+      console.log(car?.owner?.name);
+
+      // Property 다루기
+      // 없는 Key에 값을 할당하면 : 새로 생성
+      // 있는 Key에 값을 할당하면 : 기존 값 수정
+      const book = {} //빈객체
+      book.title = '홍길동전';
+      console.log(book);
+
+      //property shorthand
+      {
+        const zipCode = '12345';
+        const street = '강남대로';
+        // key , value 같은 경우 한 번만 작성.
+        const address = {
+          zipCode,
+          street
+        }
+        console.log(address);
+      }
+    }
+
+    //객체 구조분해 할당 (Object Destructuring Assignment)
+    {
+      const qna = {
+        q: '한국의 수도는?',
+        a: '서울이다.'
+      }
+      //원래는 
+      //const question = qna.q;
+      //const answer = qna.a;
+
+      // 구조 분해 할당은
+      const {q,a} = qna; //기존 이름 그대로 할당 (추천)
+      console.log(q,a);
+
+      // 변수 이름 변경해서 받을 수도 있음.
+      const {q:question,a:answer} = qna;
+      console.log(question,answer);
+
+      //간단한 연습 (객체를 함수에 전달할 때)
+      // 올드 스타일
+      function fnPrintUserOld(user){
+        console.log(user.id, user.pwd); 
+      }
+
+      function fnPrintUserNew({id,pwd}){
+        console.log(id, pwd);
+      }
+
+      const user = {
+        id:'admin',
+        pwd:'1234',
+      }
+
+      fnPrintUserOld(user);
+
+      // 나머지 속성 (Property)
+      // 말 줄임표 (...)
+      // ★ 할당 연산자(=) 기준으로 왼쪽에 배치, (값을 전달받는 쪽.)
+      const computer = {
+        cpu: "intel5",
+        ram: "32g",
+        ssd: "512g",
+      }
+
+      //구조분해 할당 시 나머지 속성 (last property) 사용
+      const {cpu, ...rest} = computer;
+      console.log(cpu);
+      console.log(rest); //{ram: "32g", ssd: "512g"}
+    }
+
+    {
+      // 전개 구문 (Spread Syntax) -> 이 문법을 많이 씀 !! 기존 객체값 다 가져다 쓰되 , 내가 바꾸고 싶은것만 바꾼다.
+      const phone = {
+        model: 'galaxy',
+        size: 'ultra',
+      }
+      const smartPhone = {
+        ...phone, // phone 객체의 프로퍼티를 펼쳐서 집어넣어라.
+        size: '6 inch',
+        color: 'black',
+      }
+      console.log(smartPhone);
+    }
+
+    // this 와 바인딩
+    // this 란 어떤 함수를 호출하는 주체.
+    {
+      function print(){
+        console.log('print 호출:' , this);
+      }
+      print(); // 호출 하는 건 전역객체 (window)
+
+      const car = {
+        model: 'Genesis',
+        price: 5000,
+        drive : function(){
+          console.log('drive 호출:' , this);
+          console.log(this.model);
+        }
+      }
+      car.drive(); // 호출하는 건 : car 객체.
+    }
+    
+    // 객체 생성자 함수 : 동일 프로퍼티를 가진 여러 객체가 필요할 때 유용하다.
+    {
+      //생성자 함수는 PascalCase 권장
+      function Office(location){
+        // this 바인딩 : 생성자 함수로 생성하는 객체에 연결됨
+        this.location = location;
+      }
+
+      // 객체 생성 : new 연산자로 생성
+      const office1 = new Office('강남');
+      const office2 = new Office('서초');
+      console.log(office1);
+      console.log(office2 instanceof Office);
+
+    }
+
+    // 프로토타입
+    // 모든 객체가 가지는 부모 타입의 객체를 의미함. (Object)
+    // 프로토타입에는 공유 데이터를 넣고 사용함
+    {
+      // 프로토타입이 필요한 경우
+      function Coffee(store){
+        this.store = store;
+        // this.info = function(){ // 이 구성은 객체마다 동일한 메서드를 가지므로 , 메모리 낭비
+        //   console.log(`${this.store}에서 판매하는 커피입니다.`);
+        // }
+        
+      }
+      // Coffee 생성자 함수의 메서드를 프로토타입에 등록 (공유 영역에 등록)
+      Coffee.prototype.info = function(){
+        console.log(`${this.store}에서 판매하는 커피입니다.`);
+      }
+
+
+      const coffee1 = new Coffee('메가커피');
+      const coffee2 = new Coffee('컴포즈커피');
+      coffee1.info();
+      coffee2.info();
+
+    }
+
+
+  </script>
+  
+</body>
+</html>

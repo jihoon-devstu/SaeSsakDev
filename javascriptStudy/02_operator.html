@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+
+    /*
+      비교연산자 학습 
+    */
+   {
+    //일치 불일치
+    console.log(1 === '1'); // false
+    console.log(1 !== '1'); // true
+   }
+
+   {
+    // Falsy : Type이 달라도 값이 같으면 혹은 값이 비어있으면 true로 취급한다.
+    console.log(0 === false); // false
+    console.log(0 == false); // true
+    console.log(undefined === false); // false
+    console.log(undefined == false); // true
+    console.log('' == false); // true
+    console.log(null == false); // true
+   }
+
+   {
+    // 논리연산 (&& , ||)
+    // Short Circuit
+    let a = '';
+    console.log(a || 'hello'); // or의 경우 , false인 경우(값이 없으면) 오른쪽 값을 반환한다. true인 경우(값이 있으면) 왼쪽 값을 반환한다.
+    console.log(a && 'hello'); // and의 경우 , false인 경우(값이 없으면) 왼쪽 값을 반환한다. true인 경우(값이 있으면) 오른쪽 값을 반환한다.
+   }
+
+   {
+    // null 병합 연산 (Nullish Coalescing Operator)
+    let a;
+    let b = null;
+    console.log(typeof a, typeof b);
+
+    console.log(a ?? 'hello'); // null 병합 연산의 경우 , null 또는 undefined인 경우 오른쪽 값을 반환한다. 그 외의 경우(값이 있으면) 왼쪽 값을 반환한다.
+    console.log(b ?? 'hello');
+   }
+
+   /*
+    falsy 와 nullish의 차이는 잘 알고 나눠 써야 한다.
+    falsy : false, 0, null, undefined, NaN, ''
+    nullish : null, undefined
+   */
+
+  </script>
+</body>
+</html>
