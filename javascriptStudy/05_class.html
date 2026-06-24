@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //카트 아이템
+    class CartItem{
+      //private 필드 
+      #quantity;
+      #price;
+      
+      //생성자
+      constructor(name, price, quantity =1){ // quantity =1 : 전달 안되면 사용될 기본 값 , Default처리는 마지막에 둘 것 !
+        this.name = name;
+        this.#price = price; // private property에 전달
+        this.quantity = quantity; // Setter를 이용해서 전달하겠다.
+      }
+
+      set quantity(value){
+        if(Number.isInteger(value) === false || value <1){
+          console.error('수량은 정수만 가능합니다.');
+          return;   
+        } 
+        this.#quantity = value;
+      }
+
+      get quantity(){
+        return this.#quantity;
+      }
+
+      set price(value){
+        if(value <0){
+          console.error('가격은 0보다 작을 수 없습니다.');
+          return;
+        } 
+        this.#price = value;
+      }
+
+      get price(){
+        return this.#price;
+      }
+
+      getTotalPrice(){
+        return this.#price * this.#quantity;
+      }
+
+      getSummary(){
+        return `${this.name} | 단가 : ${this.#price}| 수량 : ${this.#quantity} | 총 가격 : ${this.getTotalPrice()}`
+      }
+
+      //수량 추가 메서드
+      addQuantity(amount){
+        if(amount<=0) {
+          console.error('수량은 0보다 작을 수 없습니다.'); 
+          return;
+        }
+        this.#quantity += amount; // Setter 호출 !! 
+      }
+
+    }
+
+    // instance 생성 (생성자 호출)
+    const item = new CartItem('TV',500000);
+    console.log(item);
+    console.log(item.addQuantity(2));
+    console.log(item.getSummary());
+
+    // 밸리데이션 테스트
+    item.price = -10000; // error 메세지 
+    item.quantity = -5;
+
+    class DiscountCartItem extends CartItem{
+      #discount;
+
+      constructor(name, price, quantity, discount){
+        super(name, price, quantity);
+        this.discount = discount;
+      }
+
+      set discount(value){
+        if(value >0 || value <100){
+          console.error('할인율은 0~100 사이만 가능합니다.');
+          return;
+        }
+        this.#discount = value;
+      }
+
+      get discount(){
+        return this.#discount;
+    }
+
+    //메서드 오버라이드
+    getTotalPrice(){
+      return super.price * this.quantity -(super.price * super.quantity * this.#discount /100);
+    }
+
+    getSummary(){
+      return `${super.getSummary()} | 할인율 : ${this.#discount}`
+    }
+
+  }
+
+
+  </script>
+</body>
+</html>
