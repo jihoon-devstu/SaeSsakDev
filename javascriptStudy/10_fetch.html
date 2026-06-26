@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div>
+    <option value=""></option>
+    <option value=""></option>
+
+  </div>
+  
+
+  <script>
+    document.getElementById('btn2').addEventListener('click',e=>{
+      fetch(`https://api.the${document.getElementById('sel').value}api.com/v1/images/search`);
+      console.log(myPromise);
+
+      myPromise
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="overlay" style="border: 1px solid gray; padding: 50px;">
+  <div id="content" style="background-color: silver;">
+    <h2>모달 창 제목</h2>
+    <p>모달 내부를 클릭해도 모달은 닫히지 않습니다.</p>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('overlay');
+  const content = document.getElementById('content');
+  
+  // 배경을 클릭하면 모달을 닫음
+  overlay.addEventListener('click', () => {
+    console.log('배경이 클릭되어 모달을 닫습니다.');
+    overlay.style.display = 'none';
+  });
+
+  // 모달 내부 콘텐츠를 클릭했을 때
+  content.addEventListener('click', (e) => {
+    e.stopPropagation();  // 이벤트 버블링 중단
+    console.log('부모(overlay)의 클릭 이벤트가 실행되지 않게 합니다.');
+  });
+</script>
+  
+</body>
+</html>
