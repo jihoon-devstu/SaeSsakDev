@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+<div id="root1"></div>
+<div id="root2"></div>
+
+
+<script type="text/babel" >
+  
+  //-------- 1. 기본 배열 랜더링
+  {
+    /**
+     * @type {React.FC}
+    */
+    const ListComp = ({items}) => {
+      return(
+        <ul>
+          {
+            items.map((item , i)=>{
+              return <li key = {i}>{item}</li>
+            })
+          }
+          
+        </ul>
+      );
+    }
+
+    /**
+     * @type {string[]}
+     * 
+    */
+    const names = ["tom","jessica","alice"];
+
+    ReactDOM.createRoot(document.getElementById('root1')).render(<ListComp items={names}/>);
+  }
+
+  //-------- 2. 하위 컴포넌트 분할 배열 랜더링
+  {
+    const ListItemComp = ({item}) => {
+      return (
+        <li>{item.name}</li>
+      );
+    }
+
+    const ListComp = ({items}) =>{
+      return (
+        <ul>
+          {
+            items.map(item => <ListItemComp key={item.id} item = {item}/>)
+          }  
+        </ul>
+      );
+    }
+    const list = [
+      { id: 1, name: 'ironman'},
+      { id: 2, name: 'spiderman'},
+      { id: 3, name: 'hulk'}
+    ];
+    ReactDOM.createRoot(document.getElementById('root2')).render(<ListComp items={list}/>);
+  }
+
+
+</script>
+
+</body>
+</html>
