@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* @type {any} */
+    const globalWindow = window;
+    const {React , ReactDOM} = globalWindow;
+  </script>
+  
+<div id="root"></div>
+<div id="root2"></div>
+<script type="text/babel" >
+  
+  // 1. 기본 useState 활용
+  /** @type {React.FC} */
+  const Counter = () => {
+    //userState
+    /** @type {[number, (value: number) => void]}*/
+    const [myState , setMystate] = React.useState(0);
+
+    /** @param {React.MouseEvent<HTMLButtonElement>} e */
+    const handleIncrement = (e) => {
+      //상태 변경은 반드시 상태 변경 함수를 사용해야한다 !!
+      //setMystate(myState + 1); // (가능) 값 전달의 경우 , 클릭속도가 빠르면 씹히는 경우가 있음.
+      setMystate(prevState=>prevState + 1); // (가능) 콜백 전달: 실무 표준
+    }
+
+
+    return (
+      <>
+        <h1>{myState}</h1>
+        <button onClick={handleIncrement}>증가</button>
+      </>
+  );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<Counter/>);
+
+  // 2. 입력상자와 useState
+  /** @type {React.FC}*/
+  const InputComponent = ()=>{
+    const [inputValue, setInputValue] = React.useState('');
+    
+    /** @param {React.ChangeEvent<HTMLInputElement>} e */
+    const handleChange = (e) => {
+      setInputValue(e.target.value);
+    }
+
+    return (
+      <>
+      <h1>{InputComponent}</h1>
+        <input type={"text"} value={inputValue} onChange={handleChange}/>
+        <p>{inputValue}</p>
+      </>
+    );
+
+  }
+
+ReactDOM.createRoot(document.getElementById('root2')).render(<InputComponent/>);
+</script>
+
+</body>
+</html>
